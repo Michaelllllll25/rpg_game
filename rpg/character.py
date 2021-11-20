@@ -1,15 +1,4 @@
 import random
-import pprint
-
-class bcolors:
-  HEADER = '\033[95m'
-  OKBLUE = '\033[94m'
-  OKGREEN = '\033[92m'
-  WARNING = '\033[93m'
-  FAIL = '\033[91m'
-  ENDC = '\033[0m'
-  BOLD = '\033[1m'
-  UNDERLINE = '\033[4m'
 
 class Character:
     def __init__(self, name: str, hp: int, vb: int, atk: int, magic: str, items: str, wallet: int) -> None:
@@ -20,7 +9,7 @@ class Character:
         self.max_hp = hp
         # VB (cost for items)
         self.vb = vb
-        self.max_mp = vb
+        self.max_vb = vb
         self.atk_low = atk - 10
         self.atk_high = atk + 10
         self.magic = magic
@@ -53,7 +42,7 @@ class Character:
     def choose_magic(self):
         i = 1 
         
-        print("\n" + bcolors.OKBLUE + bcolors.BOLD + "     MAGIC:" + bcolors.ENDC)
+        print("\n""     MAGIC:")
         for spell in self.magic:
             print("        " + str(i) + ".", spell.name, "(cost:", str(spell.cost) + ")")
             i += 1
@@ -61,7 +50,7 @@ class Character:
     def choose_items(self):
         i = 1 
         
-        print("\n" + bcolors.OKGREEN + bcolors.BOLD + "     ITEMS:" + bcolors.ENDC)
+        print("\n""     ITEMS:")
         
         # This prints out the items available in the items dictionary:
         for item in self.items:
@@ -75,11 +64,32 @@ class Character:
         # This makes sure you don't heal above your max hp 
         if self.hp > self.maxhp:
             self.hp = self.maxhp 
-    
-
    
-    def reduce_mp(self, cost):
-        self.mp -= cost
-       
-# players = Character['mm', '1000', '500']
-# for player in players
+    def reduce_vb(self, cost):
+        self.vb -= cost
+
+    def get_stats(self):        
+        hp = ""
+        hp_ticks = (self.hp / self.max_hp) * 100 / 4
+        
+        mp_bar = ""
+        mp_ticks = (self.vb / self.max_vb) * 100 / 10
+
+    def choose_action(self):
+        i = 1 
+        print("\n" + "    " + self.name)
+        print("    ACTIONS")
+        for item in self.actions:
+            print("        " + str(i) + ".", item)
+            i += 1 
+
+    def choose_target(self, enemies):
+        i = 1    
+        print("\n""    TARGET:")
+        # This prints the enemies on screen, and then lets the player decide which enemy to attack
+        for enemy in enemies:
+            if enemy.get_hp() != 0:
+                print("        " + str(i) + ".", enemy.name)
+                i += 1 
+            choice = int(input("    Choose target:")) - 1 
+            return choice
