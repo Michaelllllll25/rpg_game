@@ -55,8 +55,3 @@ while game == True:
         index = int(choice) - 1 
         
 
-
-
-
-
-
