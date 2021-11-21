@@ -10,6 +10,7 @@ class Character:
         # VB (cost for items)
         self.vb = vb
         self.max_vb = vb
+        self.atk = atk
         self.atk_low = atk - 10
         self.atk_high = atk + 10
         self.magic = magic
@@ -19,21 +20,38 @@ class Character:
         self.wallet = 500
 
     def get_hp(self) -> int:
+        """Returns hp"""
         return self.hp
      
     def get_max_hp(self) -> int:
+        """Returns max hp"""
         return self.max_hp 
    
     def get_vb(self) -> int:
+        """Returns vb"""
         return self.vb
      
     def get_max_vb(self) -> int:
+        """Returns max vb"""
         return self.max_vb 
 
     def generate_damage(self) -> int:
+        """Generates damage
+        
+        Returns:
+            A random number between the attack value low and attack value high
+        """
         return random.randrange(self.atk_low, self.atk_high)
        
     def take_damage(self, dmg: int) -> int:
+        """Subtracts damage froim your health
+        
+        Args:
+            dmg: damage
+            
+        Returns:
+            Health subtracted by damage
+        """
         self.hp -= dmg
         if self.hp < 0:
             self.hp = 0 
