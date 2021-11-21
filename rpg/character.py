@@ -1,7 +1,7 @@
 import random
 
 class Character:
-    def __init__(self, name: str, hp: int, vb: int, atk: int, magic: str, items: str, wallet: int) -> None:
+    def __init__(self, name: str, hp: int, vb: int, atk: int, magic: list, items: list, wallet: int) -> None:
         self.name = name
         # Current HP
         self.hp = hp
@@ -24,7 +24,7 @@ class Character:
     def get_max_hp(self) -> int:
         return self.max_hp 
    
-    def vb(self) -> int:
+    def get_vb(self) -> int:
         return self.vb
      
     def get_max_vb(self) -> int:
@@ -39,7 +39,7 @@ class Character:
             self.hp = 0 
         return self.hp 
 
-    def choose_magic(self):
+    def choose_magic(self) -> None:
         i = 1 
         
         print("\n""     MAGIC:")
@@ -47,7 +47,7 @@ class Character:
             print("        " + str(i) + ".", spell.name, "(cost:", str(spell.cost) + ")")
             i += 1
        
-    def choose_items(self):
+    def choose_items(self) -> None:
         i = 1 
         
         print("\n""     ITEMS:")
@@ -59,23 +59,23 @@ class Character:
     
    # These are utility classes to get HP and MP information to calculate remaining MP and HP points  
     
-    def heal(self, dmg):
+    def heal(self, dmg) -> None:
         self.hp += dmg
         # This makes sure you don't heal above your max hp 
         if self.hp > self.maxhp:
             self.hp = self.maxhp 
    
-    def reduce_vb(self, cost):
+    def reduce_vb(self, cost) -> None:
         self.vb -= cost
 
-    def get_stats(self):        
+    def get_stats(self) -> None:        
         hp = ""
         hp_ticks = (self.hp / self.max_hp) * 100 / 4
         
         mp_bar = ""
         mp_ticks = (self.vb / self.max_vb) * 100 / 10
 
-    def choose_action(self):
+    def choose_action(self) -> None:
         i = 1 
         print("\n" + "    " + self.name)
         print("    ACTIONS")
@@ -83,7 +83,7 @@ class Character:
             print("        " + str(i) + ".", item)
             i += 1 
 
-    def choose_target(self, enemies):
+    def choose_target(self, enemies: list) -> None:
         i = 1    
         print("\n""    TARGET:")
         # This prints the enemies on screen, and then lets the player decide which enemy to attack
@@ -93,3 +93,4 @@ class Character:
                 i += 1 
             choice = int(input("    Choose target:")) - 1 
             return choice
+
