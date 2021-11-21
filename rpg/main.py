@@ -52,6 +52,6 @@ while game == True:
         choice = input("    Choose Action: ")
         # Index is a variable that takes the value of choice and subtracts it by 1 to give the program the correct index value for each of the lists
         # This is because computers start counting lists from position "0"
-        index = int(choice) - 1 
+        index = int(choice) - 1  
         
 
